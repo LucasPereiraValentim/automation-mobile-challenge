@@ -1,0 +1,6 @@
+{
+    "platformVersion": "11.0",
+    "automationName": "uiautomator2",
+    "appActivity": "com.wdiodemoapp.MainActivity",
+    "appPackage": "com.wdiodemoapp"
+}

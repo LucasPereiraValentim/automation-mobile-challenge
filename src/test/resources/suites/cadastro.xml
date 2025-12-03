@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Cadastro">
+	<test name="Cadastro">
+		<parameter name="udid" value="emulator-5554" />
+		<parameter name="platformName" value="android" />
+		<parameter name="deviceName" value="Pixel" />
+		<classes>
+            <class name="com.automation.mobile.RunnerMobileTest" />
+        </classes>
+	</test>
+</suite>

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class SignUpPage {
 
-    @AndroidFindBy(accessibility = "button-sign-up-container")
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"button-sign-up-container\"]")
     @iOSXCUITFindBy(accessibility = "")
     private WebElement BTN_SIGN_UP;
 
@@ -31,7 +31,7 @@ public class SignUpPage {
     @iOSXCUITFindBy(xpath = "")
     private WebElement BOTAO_REALIZAR_CADASTRO;
 
-    @AndroidFindBy(id = "android:id/message")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"android:id/message\"]")
     private WebElement TEXTO_MENSAGEM_SUCESSO_CADASTRO;
 
     public SignUpPage() {

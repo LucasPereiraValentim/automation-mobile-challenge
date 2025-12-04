@@ -11,21 +11,17 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class HomePage {
-	
-	@AndroidFindBy(id = "com.Advantage.aShopping:id/imageViewMenu")
-	private WebElement MENU_PRINCIPAL;
-	
-	@AndroidFindBy(id = "com.Advantage.aShopping:id/editTextSearch")
-	private WebElement CAMPO_SEARCH;
-
-	@AndroidFindBy(xpath = "//*[@resource-id='com.Advantage.aShopping:id/textViewMenuUser']")
-	private WebElement BOTAO_LOGIN;
 
     @AndroidFindBy(accessibility = "Login")
     @iOSXCUITFindBy(accessibility = "")
     private WebElement ABA_LOGIN;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Swipe\")")
+    @iOSXCUITFindBy(accessibility = "")
+    private WebElement ABA_SWIPE;
 	
 	public HomePage() {
 		PageFactory.initElements(new AppiumFieldDecorator(UtilsMobile.getDriver()), this);
 	}
+
 }

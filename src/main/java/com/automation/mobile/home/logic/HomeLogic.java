@@ -20,5 +20,11 @@ public class HomeLogic {
         UtilsMobile.click(homePage.getABA_LOGIN(), desc);
     }
 
+    public void acessarAbaSwipe() {
+        String desc = "Clicando na aba do swipe";
+        log.info(desc);
+        UtilsMobile.click(homePage.getABA_SWIPE(), desc);
+    }
+
 
 }

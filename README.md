@@ -2,15 +2,16 @@
 Desafio TécnicoEste projeto apresenta uma solução de automação mobile para Android seguindo uma arquitetura limpa e robusta.
 A estrutura adota o padrão Page → Logic → Step, promovendo a modularidade, reusabilidade e manutenibilidade dos testes.O objetivo é demonstrar domínio de arquitetura de testes sólida, boas práticas de codificação e o uso eficiente do Appium 2.x.
 ### 🚀 Tecnologias Utilizadas
-A automação foi desenvolvida utilizando as seguintes tecnologias:Java 11: Linguagem principal do projeto.
-Maven: Ferramenta de automação de build.
-Appium 2.x (UiAutomator2): Framework de automação mobile.
-Cucumber JVM: Para a implementação do BDD (Behavior-Driven Development).
-TestNG: Framework de testes utilizado para rodar o Cucumber e gerenciar parâmetros de dispositivos.
-PageFactory: Padrão para inicialização de elementos de página.
-Allure Reports: Geração de relatórios de teste detalhados e visuais.
-Lombok: Para reduzir o boilerplate de código Java.
-SLF4J + Logback: Para gerenciamento eficiente de logs.
+A automação foi desenvolvida utilizando as seguintes tecnologias:Java 11: Linguagem principal do projeto.  
+Maven: Ferramenta de automação de build.  
+Appium 2.x (UiAutomator2): Framework de automação mobile.  
+Cucumber JVM: Para a implementação do BDD (Behavior-Driven Development).  
+TestNG: Framework de testes utilizado para rodar o Cucumber e gerenciar parâmetros de dispositivos.  
+PageFactory: Padrão para inicialização de elementos de página.  
+Allure Reports: Geração de relatórios de teste detalhados e visuais.  
+Lombok: Para reduzir o boilerplate de código Java.  
+SLF4J + Logback: Para gerenciamento eficiente de logs.  
+JavaFaker: Para geração de dados dinâmicos e fakes para realizar os testes
  
  # 🧱 Arquitetura do Projeto
  O projeto é estruturado em pacotes que refletem o padrão Page → Logic → Step e separam claramente as responsabilidades.

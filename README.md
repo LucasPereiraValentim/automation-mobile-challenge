@@ -201,7 +201,7 @@ Métodos comuns de espera (waits), visibilidade e cliques.
 Scroll.java: Implementação de gestures modernos (scroll) usando a especificação W3C (PointerInput + Sequence),
 Outros: Gerador de evidências, Config loaders e tratamento de exceções (AutomationException).
 
-## 📁 FixturesLocal: src/test/resources/fixtures
+## 📁 Fixtures: src/test/resources/fixtures
 Uso: Armazenamento de dados de teste esperados, como mensagens de sucesso, textos.
 ## 📜 Features (Cucumber BDD)
 As features descrevem o comportamento de forma legível

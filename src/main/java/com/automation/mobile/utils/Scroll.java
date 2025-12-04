@@ -99,7 +99,6 @@ public class Scroll {
             String msg = "Realizando Scroll...";
             log.info("Procurando elemento. Tentativa N°" + i);
             log.info(msg);
-            GeneratorEvidence.logStep(msg);
 
             PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             Sequence swipe = new Sequence(finger, 0); // Offset de tempo inicial 0
@@ -117,7 +116,6 @@ public class Scroll {
             if (isVisible(elementMoveTo)) {
                 msg = "Elemento encontrado";
                 log.info(msg);
-                GeneratorEvidence.logStep(msg);
                 break;
             }
         }

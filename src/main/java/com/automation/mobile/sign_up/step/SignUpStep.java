@@ -1,6 +1,7 @@
 package com.automation.mobile.sign_up.step;
 
 import com.automation.mobile.sign_up.logic.SignUpLogic;
+import com.automation.mobile.utils.GeneratorEvidence;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;

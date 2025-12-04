@@ -12,7 +12,6 @@ public class Assertion {
 
     public static void validationTestByVisible(List<WebElement> elements, String testName, String description) {
         log.info("Validando visibilidade: {} - {}", testName, description);
-        GeneratorEvidence.logStep(description);
 
         for (WebElement element : elements) {
             boolean isVisible = element.isDisplayed();
@@ -23,7 +22,6 @@ public class Assertion {
 
     public static void validationTestByVisible(WebElement element, String testName, String description) {
         log.info("Validando visibilidade: {} - {}", testName, description);
-        GeneratorEvidence.logStep(description);
 
         boolean isVisible = element.isDisplayed();
         log.info("Resultado {}: {}", testName, isVisible ? "SUCESSO" : "FALHOU");
@@ -33,7 +31,6 @@ public class Assertion {
 
     public static void validationTestByText(WebElement element, String testName, String description, String expectedText) {
         log.info("Validando texto: {} - {}", testName, description);
-        GeneratorEvidence.logStep(description);
 
         boolean isTextCorrect = getTextSafe(element).equals(expectedText);
         log.info("Resultado {}: {}", testName, isTextCorrect ? "SUCESSO" : "FALHOU");
@@ -43,7 +40,6 @@ public class Assertion {
 
     public static void validationTestByText(List<WebElement> elements, String testName, String description, List<String> expectedTexts) {
         log.info("Validando textos: {} - {}", testName, description);
-        GeneratorEvidence.logStep(description);
 
         if (elements.size() != expectedTexts.size()) {
             throw new IllegalArgumentException("Tamanho de elements (" + elements.size() + ") difere do tamanho de expectedTexts (" + expectedTexts.size() + ")");

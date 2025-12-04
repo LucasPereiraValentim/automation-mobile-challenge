@@ -3,6 +3,7 @@ package com.automation.mobile.swipe.logic;
 import com.automation.mobile.enums.ScrollDirection;
 import com.automation.mobile.swipe.page.SwipePage;
 import com.automation.mobile.utils.Assertion;
+import com.automation.mobile.utils.GeneratorEvidence;
 import com.automation.mobile.utils.Scroll;
 import com.automation.mobile.utils.UtilsMobile;
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ public class SwipeLogic {
 
     public void assertSwipeRealizado(String scenario) {
         String description = "Validação Swipe Realizado";
+        GeneratorEvidence.logStep(description);
         Assertion.validationTestByVisible(this.swipePage.getTEXT_GREAT_COMMUNITY(), scenario, description);
     }
 

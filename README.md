@@ -1,106 +1,183 @@
-📱 Automação Mobile – Desafio Técnico
-
-Automação mobile Android estruturada em Page → Logic → Step, usando Appium 2.x, Java 11, Maven, Cucumber e TestNG.
-Projeto feito para demonstrar domínio de arquitetura limpa, boas práticas e automação mobile sólida.
-
-🚀 Tecnologias
-
-Java 11
-
-Maven
-
-Appium 2.x (UiAutomator2)
-
-Cucumber JVM
-
-TestNG
-
-PageFactory
-
-Allure Reports
-
-Lombok
-
-SLF4J + Logback
-
-🧱 Arquitetura do Projeto
-automation-mobile-challenge
+# 📱 Automação Mobile
+Desafio TécnicoEste projeto apresenta uma solução de automação mobile para Android seguindo uma arquitetura limpa e robusta.
+A estrutura adota o padrão Page → Logic → Step, promovendo a modularidade, reusabilidade e manutenibilidade dos testes.O objetivo é demonstrar domínio de arquitetura de testes sólida, boas práticas de codificação e o uso eficiente do Appium 2.x.
+### 🚀 Tecnologias Utilizadas
+A automação foi desenvolvida utilizando as seguintes tecnologias:Java 11: Linguagem principal do projeto.
+Maven: Ferramenta de automação de build.
+Appium 2.x (UiAutomator2): Framework de automação mobile.
+Cucumber JVM: Para a implementação do BDD (Behavior-Driven Development).
+TestNG: Framework de testes utilizado para rodar o Cucumber e gerenciar parâmetros de dispositivos.
+PageFactory: Padrão para inicialização de elementos de página.
+Allure Reports: Geração de relatórios de teste detalhados e visuais.
+Lombok: Para reduzir o boilerplate de código Java.
+SLF4J + Logback: Para gerenciamento eficiente de logs.
+ 
+ # 🧱 Arquitetura do Projeto
+ O projeto é estruturado em pacotes que refletem o padrão Page → Logic → Step e separam claramente as responsabilidades.
+ 
+```
 ├── allure-results
 ├── src
-│    ├── main/java/com.automation.mobile
-│    │      ├── enums
-│    │      ├── home
-│    │      │      ├── page
-│    │      │      ├── logic
-│    │      │      └── step
-│    │      ├── sign_up
-│    │      │      ├── page
-│    │      │      ├── logic
-│    │      │      └── step
-│    │      ├── swipe
-│    │      │      ├── page
-│    │      │      ├── logic
-│    │      │      └── step
-│    │      └── utils
-│    └── test
-│         ├── java/com.automation.mobile/RunnerMobileTest.java
-│         └── resources
-│               ├── apk
-│               ├── device-config/android-device-config.json
-│               ├── features
-│               ├── fixtures
-│               └── suites/suite_all_testes.xml
+│    ├── main/java/com.automation.mobile
+│    │      ├── enums              # Tipos enumerados
+│    │      ├── home
+│    │      │      ├── page         # Localizadores de elementos da Home
+│    │      │      ├── logic        # Regras de negócio/navegação da Home
+│    │      │      └── step         # Implementação Cucumber BDD da Home
+│    │      ├── sign_up            # Pacote de Cadastro (Page, Logic, Step)
+│    │      ├── swipe              # Pacote de Gestos Swipe (Page, Logic, Step)
+│    │      └── utils              # Classes de utilidade e suporte
+│    └── test
+│         ├── java/com.automation.mobile/RunnerMobileTest.java # Runner Principal
+│         └── resources
+│               ├── apk            # Arquivo .apk do aplicativo
+│               ├── device-config/android-device-config.json # Configuração do dispositivo
+│               ├── features       # Arquivos .feature do Cucumber
+│               ├── fixtures       # Dados de teste (mensagens, payloads)
+│               └── suites/suite_all_testes.xml # Suite TestNG
 ├── pom.xml
 └── README.md
-
+```
 🧩 Padrão Page → Logic → Step
-📄 Page
+Este padrão é o coração da arquitetura, garantindo a separação de preocupações (Separation of Concerns).
+📄 Page: Armazena apenas localizadores de elementos.,@AndroidFindBy (sem lógica/fluxo).,"Elementos estáveis, isolados de regras."
+🧠 Logic: Contém a regra de negócio e a navegação.,"Comportamentos (scroll, tap, waits) e operações (login, swipe).","Lógica testável, reutilizável e isolada do Step."
+🎙 Step: Liga o Cucumber à camada Logic.,Chamadas de métodos da Logic (sem regras de negócio ou elementos).,"Steps clean (focados no BDD), fácil leitura."
 
-Apenas localizadores (@AndroidFindBy)
+## 🌐 Configuração Nessárias
 
-Sem lógica ou fluxo de teste
+--------------------------------------------------
 
-Exemplo: SwipePage.java
+1. 🌐 Configurando Variáveis de Ambiente no Windows (Interface)
+   1️⃣ Abrir as Configurações de Variáveis de Ambiente
 
-🧠 Logic
+Abra o Menu Iniciar e digite Editar as variáveis de ambiente do sistema.
 
-Regras de navegação
+Clique na opção que aparecer.
 
-Comportamentos (scroll, tap, waits)
+Na janela Propriedades do Sistema, clique no botão Variáveis de Ambiente....
 
-Operações de negócio (login, swipe)
+2️⃣ Configurar JAVA_HOME
 
-Exemplo: SwipeLogic.java
+Na seção Variáveis do sistema, clique em Novo....
 
-🎙 Step
+No campo Nome da variável, digite:
 
-Liga Cucumber → Logic
+```
+JAVA_HOME
+```
 
-Sem regra de negócio ou elementos
+No campo Valor da variável, coloque o caminho da instalação do Java 11, por exemplo:
 
-Exemplo: SwipeStep.java
+```
+C:\Program Files\Java\jdk-11.0.20
+```
 
-Benefício: Step clean, Logic testável, Page estável.
+Clique em OK para salvar.
+
+3️⃣ Configurar MAVEN_HOME
+
+Ainda em Variáveis do sistema, clique em Novo....
+
+Nome da variável:
+
+```
+MAVEN_HOME
+```
+
+Valor da variável: caminho da pasta do Maven, por exemplo:
+
+```
+C:\apache-maven-3.9.5
+```
+
+Clique em OK.
+
+4️⃣ Configurar ALLURE_HOME
+
+Clique em Novo... novamente.
+
+Nome da variável:
+```
+ALLURE_HOME
+```
+Valor da variável: caminho da pasta do Allure CLI, por exemplo:
+
+```
+C:\allure-2.35.1
+```
+Clique em OK.
+
+5️⃣ Atualizar a variável PATH
+
+Na seção Variáveis do sistema, localize a variável Path e clique em Editar....
+
+Clique em Novo e adicione os seguintes caminhos (ajuste conforme suas instalações):
+
+```
+
+%JAVA_HOME%\bin
+
+%MAVEN_HOME%\bin
+
+%ALLURE_HOME%\bin
+
+```
+
+Clique em OK em todas as janelas para salvar.
+
+6️⃣ Testar as configurações
+
+Abra o Prompt de Comando (cmd).
+
+Execute:
+
+```
+
+java -version
+
+mvn -version
+
+allure --version
+
+```
 
 ▶️ Como Rodar
-# Build do projeto
+
+Pré-requisitos
+
+Instalar o Appium via CMD
+```
+npm i -g appium
+```
+```
+appium driver install uiautomator2
+```
+Iniciar servidor
+```
+appium --address 127.0.0.1 --port 9000 --base-path /wd/hub
+```
+Configurar Dispositivo/Emulador 
+Android: O projeto espera que um emulador ou dispositivo real esteja ativo. 
+
+A configuração é definida em:src/test/resources/device-config/android-device-config.json
+
+Execução dos Testes
+
+O projeto utiliza o TestNG para injetar os parâmetros do dispositivo e rodar os testes.
+
+Comandos:
+```
 mvn clean install
-
-# Executar todos os testes
-mvn test
-
-# Executar suite TestNG
-mvn test -DsuiteXmlFile=src/test/resources/suites/suite_all_testes.xml
-
+mvn test -DsuiteXmlFile=src/test/resources/suites/suite_all_testes.xmlRecomendado: 
+```
+Executa todos os testes via Suite do TestNG.
 📁 Suite TestNG
+O arquivo de suíte (src/test/resources/suites/suite_all_testes.xml) permite configurar o dispositivo de forma externa:
 
-Arquivo: src/test/resources/suites/suite_all_testes.xml
-
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite Test All">
+```
+XML<suite name="Suite Test All">
     <test name="Suite Test All">
-        <!-- Parâmetros do dispositivo -->
         <parameter name="udid" value="emulator-5554" />
         <parameter name="platformName" value="android" />
         <parameter name="deviceName" value="Pixel" />
@@ -110,139 +187,43 @@ Arquivo: src/test/resources/suites/suite_all_testes.xml
         </classes>
     </test>
 </suite>
+```
+# 🛠️ Detalhes da Implementação
 
+## 🧪 Runner Cucumber + TestNGArquivo: src/test/java/com/automation/mobile/RunnerMobileTest.java
+Função: É o ponto de entrada. Responsável por carregar features, configurar plugins Allure e associar os steps (glue). É rodado pelo TestNG para receber os parâmetros de dispositivo.
 
-Explicação:
+## 🔧 Utilitários (/utils)
+Contém classes de suporte essenciais: 
+DriverFactory: Criação e gerenciamento do driver.UtilsMobile: 
+Métodos comuns de espera (waits), visibilidade e cliques.
+Scroll.java: Implementação de gestures modernos (scroll) usando a especificação W3C (PointerInput + Sequence),
+Outros: Gerador de evidências, Config loaders e tratamento de exceções (AutomationException).
 
-<suite> → Conjunto de testes.
+## 📁 FixturesLocal: src/test/resources/fixtures
+Uso: Armazenamento de dados de teste esperados, como mensagens de sucesso, textos.
+## 📜 Features (Cucumber BDD)
+As features descrevem o comportamento de forma legível
 
-<test> → Grupo de testes dentro da suite.
-
-<parameter> → Parâmetros do dispositivo que podem ser lidos no Runner (@Parameters).
-
-<classes> → Classes que contêm os testes (Runner Cucumber + TestNG).
-
-TestNG injeta os parâmetros no Runner e dispara os testes no dispositivo ou emulador configurado.
-
-📱 Appium Setup
-npm install -g appium
-appium driver install uiautomator2
-appium
-
-
-Configuração do dispositivo:
-src/test/resources/device-config/android-device-config.json
-
-📁 Fixtures
-
-Local: src/test/resources/fixtures
-Usado para mensagens esperadas, textos e payloads.
-No mobile, substitui o environment.yaml das APIs.
-
-🧪 Runner Cucumber + TestNG
-
-Arquivo: src/test/java/com/automation/mobile/RunnerMobileTest.java
-
-Responsável por:
-
-Carregar features
-
-Configurar plugins Allure
-
-Associar glue (steps)
-
-Rodar com TestNG Platform via suite XML
-
-🔧 Utils
-
-DriverFactory – criação do driver
-
-UtilsMobile – waits, visibility, clicks
-
-Scroll.java – gestures W3C (PointerInput + Sequence)
-
-AutomationException
-
-Gerador de evidências
-
-Config loaders
-
-Exemplo scroll:
-
-Scroll.scroll(ScrollDirection.DOWN, elementoScroll, elementoTarget);
-
-📊 Allure Reports
-
-Gerado em /allure-results
-
-Visualizar:
-
+## 📊 Allure Reports
+Relatórios de teste são gerados automaticamente na pasta /allure-results.
+Para visualizar o relatório, execute o comando (requer o CLI do Allure instalado)
+```
 allure serve allure-results
+```
 
-### 🖼️ Prints do relatório
+## ⛔ Exclusões e Limitações
 
-![Allure Report](screenshots-allure-reports/allure-01.png)
-![Allure Report](screenshots-allure-reports/allure-02.png)
+#### iOS❌ Não ImplementadoRequer Mac/Xcode/WDA
 
-📜 Features (Cucumber BDD)
+#### Pipeline ❌ Não Incluso
 
-Exemplo: 
+#### ✅ Foco na execução local
 
-Feature: Cadastro de Usuário
+## 📝 Screenshots capturadas do relatório gerado pelo AllureReports
 
-Scenario: CT01 - Realizar cadastro de usuário
-Given que acesso a home do app
-When preencho campo e-mail
-And preencho o campo senha
-And preencho o campo de confirmacao de senha
-Then deve exibir mensagem de sucesso de cadastro
+![AllureReports](https://github.com/LucasPereiraValentim/automation-mobile-challenge/blob/master/src/test/screenshots-allure-reports/allure-01.png)
 
+![AllureReports](https://github.com/LucasPereiraValentim/automation-mobile-challenge/blob/master/src/test/screenshots-allure-reports/allure-02.png)
 
-Steps → chamam Logic
-
-Logic → toca na tela / faz scroll
-
-Page → só os elementos
-
-❌ iOS
-
-Não implementado:
-
-Sem Mac / Xcode / WDA
-
-Fora do escopo do desafio
-
-❌ CI / Pipeline Mobile
-
-Não incluso, GitHub Actions não suporta emulador Android estável
-
-Mobile farm fora do desafio
-
-Foco na execução local
-
-✨ Conclusão
-
-O projeto demonstra:
-
-Arquitetura limpa: Page → Logic → Step
-
-Scroll e gestures modernos (W3C)
-
-Uso correto do Appium 2
-
-Testes organizados e modulares
-
-BDD sem gambiarra
-
-Allure integrado
-
-Config externa de device
-
-Java 11 + Maven + TestNG
-
-Projeto fácil de rodar e entender
-
-✍️ Desenvolvido por
-
-Lucas Pereira Valentim
-Automação • Mobile • Qualidade • Café ☕💻
+Desenvolvido por Lucas Pereira Valentim • Automação • Mobile • Qualidade • Café ☕💻

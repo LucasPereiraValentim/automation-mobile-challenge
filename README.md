@@ -49,7 +49,7 @@ Este padrão é o coração da arquitetura, garantindo a separação de preocupa
 
 --------------------------------------------------
 
-1. 🌐 Configurando Variáveis de Ambiente no Windows (Interface)
+1. 🌐 Configurando Variáveis de Ambiente no Windows (Interface)  
    1️⃣ Abrir as Configurações de Variáveis de Ambiente
 
 Abra o Menu Iniciar e digite Editar as variáveis de ambiente do sistema.
@@ -92,9 +92,25 @@ Valor da variável: caminho da pasta do Maven, por exemplo:
 C:\apache-maven-3.9.5
 ```
 
+4️⃣ Configurar ANDROID_HOME
+
+```
+C:\Users\<seu-usuario>\AppData\Local\Android\Sdk
+
 Clique em OK.
 
-4️⃣ Configurar ALLURE_HOME
+```
+PATH
+
+```
+%JAVA_HOME%\bin
+%MAVEN_HOME%\bin
+%ALLURE_HOME%\bin
+%ANDROID_HOME%\platform-tools
+%ANDROID_HOME%\tools
+%ANDROID_HOME%\tools\bin
+```
+5️⃣ Configurar ALLURE_HOME
 
 Clique em Novo... novamente.
 
@@ -109,7 +125,7 @@ C:\allure-2.35.1
 ```
 Clique em OK.
 
-5️⃣ Atualizar a variável PATH
+ Atualizar a variável PATH
 
 Na seção Variáveis do sistema, localize a variável Path e clique em Editar....
 
@@ -156,12 +172,99 @@ appium driver install uiautomator2
 ```
 Iniciar servidor
 ```
-appium --address 127.0.0.1 --port 9000 --base-path /wd/hub
+appium --address 127.0.0.1 --port 4723 --base-path /wd/hub
 ```
+
+Configuração do Emulador
+
+Android 14
+
+UDID configurável no arquivo: src/test/resources/device-config/android-device-config.json
+
+O projeto suporta instalação automática do APK se ele não estiver presente
+
+## ⚡ Iniciar Emulador via Script (Windows)
+
+Você pode usar o script `start-emulator.bat` para iniciar o emulador automaticamente:
+
+- Checa se o AVD existe
+- Inicia o emulador se não estiver rodando
+- Aguarda o boot completo antes de executar os testes
+
+```bat
+@echo off
+SETLOCAL ENABLEDELAYEDEXPANSION
+
+:: CONFIGURAÇÕES
+SET SDK_PATH=%ANDROID_HOME%
+SET AVD_NAME=Pixel
+
+echo ================================
+echo    INICIANDO EMULADOR AVD
+echo ================================
+echo.
+
+:: 1) CHECAR SE O AVD EXISTE
+echo Verificando existencia do AVD "%AVD_NAME%"...
+"%SDK_PATH%\emulator\emulator.exe" -list-avds | findstr /I "^%AVD_NAME%$" >nul
+
+IF %ERRORLEVEL% NEQ 0 (
+    echo ERRO: O AVD "%AVD_NAME%" nao existe!
+    echo Use o Android Studio para criar um dispositivo com esse nome.
+    exit /b 1
+)
+
+echo AVD encontrado.
+echo.
+
+:: 2) VERIFICAR SE O EMULADOR JA ESTA RODANDO
+echo Verificando se o emulador ja esta rodando...
+"%SDK_PATH%\platform-tools\adb.exe" devices | findstr "emulator" >nul
+
+IF %ERRORLEVEL% EQU 0 (
+    echo Emulador ja esta rodando. Pulando inicializacao.
+    GOTO WAIT_BOOT
+)
+
+echo Emulador nao esta rodando. Iniciando...
+echo.
+
+START "" "%SDK_PATH%\emulator\emulator.exe" -avd %AVD_NAME% -no-snapshot-load -no-boot-anim
+
+:: DAR UM TEMPO PRA PROCESSO SUBIR
+timeout /t 5 >nul
+
+:WAIT_BOOT
+echo ================================
+echo   AGUARDANDO BOOT COMPLETO...
+echo ================================
+
+:CHECK_BOOT
+FOR /F "tokens=1,*" %%i IN ('"%SDK_PATH%\platform-tools\adb.exe" shell getprop sys.boot_completed 2^>nul"') DO (
+    IF "%%i"=="1" (
+        echo Boot finalizado!
+        GOTO END
+    )
+)
+
+echo Ainda iniciando... esperando 3s
+timeout /t 3 >nul
+GOTO CHECK_BOOT
+
+:END
+echo.
+echo ================================
+echo   EMULADOR PRONTO PARA USO
+echo ================================
+echo.
+ENDLOCAL
+exit /b 0
+```
+
 Configurar Dispositivo/Emulador 
 Android: O projeto espera que um emulador ou dispositivo real esteja ativo. 
 
-A configuração é definida em:src/test/resources/device-config/android-device-config.json
+A configuração é definida em: src/test/resources/device-config/android-device-config.json
 
 Execução dos Testes
 
@@ -169,8 +272,7 @@ O projeto utiliza o TestNG para injetar os parâmetros do dispositivo e rodar os
 
 Comandos:
 ```
-mvn clean install
-mvn test -DsuiteXmlFile=src/test/resources/suites/suite_all_testes.xmlRecomendado: 
+mvn clean test
 ```
 Executa todos os testes via Suite do TestNG.
 📁 Suite TestNG
